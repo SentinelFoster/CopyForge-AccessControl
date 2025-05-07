@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Verify Your Access</title>
+  <meta charset="UTF-8">
+  <style>
+    body { background-color: #0f0f0f; color: white; font-family: Arial, sans-serif; text-align: center; padding: 40px; }
+    input, select, button { padding: 10px; margin: 10px; width: 300px; border-radius: 5px; border: none; }
+  </style>
+  <script>
+    async function submitForm() {
+      const email = document.getElementById("email").value;
+      const duration = document.getElementById("duration").value;
+
+      const response = await fetch("http://localhost:5000/log", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, duration })
+      });
+
+      if (response.ok) {
+        window.location.href = "https://chat.openai.com/g/g-681bd1301cfc819181ed08d3a2e77e2a-copyforge-sentinel";
+      } else {
+        alert("Error logging your access. Please try again.");
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Confirm Your Email to Access CopyForge Sentinel</h1>
+  <p>This step verifies your license and grants system memory tracking.</p>
+  <input id="email" type="email" placeholder="Enter your email" required><br>
+  <select id="duration">
+    <option value="7">7 Days</option>
+    <option value="30">30 Days</option>
+    <option value="365">365 Days</option>
+  </select><br>
+  <button onclick="submitForm()">Submit and Launch Intelligence</button>
+</body>
+</html>
